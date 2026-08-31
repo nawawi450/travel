@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TravelNusa — Door to Door Travel Service</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    :root {
+      --primary-orange: #ff6b35;
+      --primary-gradient: linear-gradient(135deg, #ff8c42, #ff5400);
+      --glass-bg: rgba(255, 255, 255, 0.88);
+      --glass-border: rgba(255, 255, 255, 0.7);
+      --text-dark: #0f172a;
+      --text-muted: #64748b;
+      --wa-green: #25d366;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      background: #0b132b;
+      color: var(--text-dark);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Ambient Background Image & Glow */
+    .bg-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.75) 0%, rgba(15, 23, 42, 0.95) 100%),
+                  url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+    }
+
+    /* Navbar */
+    header {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+      font-size: 22px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .brand i {
+      color: #ff8c42;
+    }
+
+    nav {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: #fff;
+    }
+
+    .btn-tarif {
+      background: var(--primary-gradient);
+      color: #fff !important;
+      padding: 10px 22px;
+      border-radius: 99px;
+      font-weight: 700;
+      box-shadow: 0 4px 15px rgba(255, 107, 53, 0.35);
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Hero Section */
+    .hero-content {
+      max-width: 1200px;
+      margin: 20px auto 40px;
+      padding: 0 20px;
+      color: #fff;
+    }
+
+    .hero-content h1 {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      line-height: 1.2;
+      max-width: 650px;
+      margin-bottom: 12px;
+    }
+
+    .hero-content p {
+      font-size: 16px;
+      color: #94a3b8;
+      max-width: 520px;
+    }
+
+    /* Main Glassmorphism Form Card */
+    .booking-wrapper {
+      max-width: 1200px;
+      margin: 0 auto 60px;
+      padding: 0 20px;
+    }
+
+    .glass-panel {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 28px;
+      padding: 36px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 24px;
+    }
+
+    .col-6 { grid-column: span 6; }
+    .col-12 { grid-column: span 12; }
+
+    /* Step Heading Badge */
+    .step-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 14px;
+      color: var(--text-dark);
+    }
+
+    .step-badge span {
+      background: var(--primary-orange);
+      color: white;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+    }
+
+    /* Form Fields */
+    .field-box {
+      margin-bottom: 12px;
+    }
+
+    .input-field {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-field i {
+      position: absolute;
+      left: 14px;
+      color: #94a3b8;
+      font-size: 14px;
+    }
+
+    .input-field input, 
+    .input-field select, 
+    .input-field textarea {
+      width: 100%;
+      padding: 12px 14px 12px 38px;
+      background: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-dark);
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .input-field textarea {
+      padding-left: 14px;
+      resize: vertical;
+    }
+
+    .input-field input:focus, 
+    .input-field select:focus, 
+    .input-field textarea:focus {
+      border-color: var(--primary-orange);
+      box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.15);
+    }
+
+    .sub-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    /* Car Selector Cards */
+    .fleet-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .fleet-card {
+      position: relative;
+      border: 2px solid #e2e8f0;
+      border-radius: 16px;
+      background: #ffffff;
+      padding: 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      overflow: hidden;
+    }
+
+    .fleet-card input {
+      position: absolute;
+      opacity: 0;
+    }
+
+    .fleet-card img {
+      width: 100%;
+      height: 75px;
+      object-fit: contain;
+      margin: 8px 0;
+    }
+
+    .fleet-tag {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: #fff;
+    }
+
+    .tag-hemat { background: #ff8c42; }
+    .tag-nyaman { background: #0284c7; }
+    .tag-group { background: #16a34a; }
+
+    .fleet-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-dark);
+      display: block;
+    }
+
+    .fleet-capacity {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 2px;
+    }
+
+    .fleet-card:has(input:checked) {
+      border-color: var(--primary-orange);
+      background: #fffaf5;
+      box-shadow: 0 4px 15px rgba(255, 107, 53, 0.12);
+    }
+
+    /* Counter Component */
+    .counter-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 4px;
+      width: fit-content;
+      margin-bottom: 12px;
+    }
+
+    .counter-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      border: none;
+      background: #f1f5f9;
+      color: var(--text-dark);
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .counter-btn:hover { background: #e2e8f0; }
+
+    .counter-display {
+      width: 30px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    /* Button WA */
+    .btn-wa-submit {
+      width: 100%;
+      background: var(--wa-green);
+      color: white;
+      border: none;
+      padding: 16px;
+      font-size: 15px;
+      font-weight: 800;
+      border-radius: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
+      transition: transform 0.15s, background-color 0.2s;
+    }
+
+    .btn-wa-submit:hover {
+      background: #1eb954;
+      transform: translateY(-2px);
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 12px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .col-6 { grid-column: span 12; }
+      .fleet-cards { grid-template-columns: 1fr; }
+      nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-wrapper"></div>
+
+  <!-- Header Nav -->
+  <header>
+    <a href="#" class="brand">
+      <i class="fa-solid fa-van-shuttle"></i> bahtiartravel
+    </a>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Armada</a>
+      <a href="#">Jadwal</a>
+      <a href="#">Syarat</a>
+      <button class="btn-tarif">CEK TARIF</button>
+    </nav>
+  </header>
+
+  <!-- Title Content -->
+  <div class="hero-content">
+    <h1>Perjalanan Nyaman, Jemput di Pintu!</h1>
+    <p>Layanan Travel Door-to-Door Terbaik untuk Rute Antar Kota Anda. Pesan via WhatsApp - Cepat & Mudah.</p>
+  </div>
+
+  <!-- Main Booking Board -->
+  <div class="booking-wrapper">
+    <div class="glass-panel">
+      <form id="orderForm" onsubmit="event.preventDefault(); bookingWhatsApp();">
+        <div class="grid-container">
+          
+          <!-- Bagian 1: Data Kontak -->
+          <div class="col-6">
+            <div class="step-badge"><span>1</span> DATA PEMESAN</div>
+            <div class="field-box">
+              <div class="input-field">
+                <i class="fa-regular fa-user"></i>
+                <input type="text" id="custName" placeholder="Nama Lengkap" required>
+              </div>
+            </div>
+            <div class="field-box">
+              <div class="input-field">
+                <i class="fa-brands fa-whatsapp"></i>
+                <input type="tel" id="custPhone" placeholder="Nomor WhatsApp" required>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bagian 2: Rute & Waktu (KOTA ASAL & TUJUAN INPUT KETIK) -->
+          <div class="col-6">
+            <div class="step-badge"><span>2</span> RUTE & JADWAL</div>
+            <div class="sub-grid field-box">
+              <div class="input-field">
+                <i class="fa-solid fa-location-dot"></i>
+                <input type="text" id="originCity" placeholder="Ketik Kota Asal (cth: Bontang)" required>
+              </div>
+              <div class="input-field">
+                <i class="fa-solid fa-crosshairs"></i>
+                <input type="text" id="destCity" placeholder="Ketik Kota Tujuan (cth: samarinda)" required>
+              </div>
+            </div>
+            <div class="sub-grid field-box">
+              <div class="input-field">
+                <i class="fa-regular fa-calendar"></i>
+                <input type="date" id="bookDate" required>
+              </div>
+              <div class="input-field">
+                <i class="fa-regular fa-clock"></i>
+                <select id="bookTime" required>
+                  <option value="Pagi (08:00 WIB)">08:00 WIB</option>
+                  <option value="Siang (13:00 WIB)">13:00 WIB</option>
+                  <option value="Malam (19:30 WIB)">19:30 WIB</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bagian 3: Pilih Mobil -->
+          <div class="col-12">
+            <div class="step-badge"><span>3</span> PILIH ARMADA</div>
+            <div class="fleet-cards">
+              
+              <!-- <label class="fleet-card">
+                <input type="radio" name="fleet" value="Avanza / Xenia" checked>
+                <span class="fleet-tag tag-hemat">Hemat</span>
+                <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=400&q=80" alt="Avanza">
+                <span class="fleet-title">XENIA</span>
+                <span class="fleet-capacity">Kapasitas Maks. 5 Seat</span>
+              </label> -->
+
+              <label class="fleet-card">
+                <input type="radio" name="fleet" value="Innova Reborn">
+                <span class="fleet-tag tag-nyaman">Nyaman</span>
+                <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=400&q=80" alt="Innova">
+                <span class="fleet-title">INNOVA REBORN</span>
+                <span class="fleet-capacity">Kapasitas Maks. 6 Seat</span>
+              </label>
+          </div>
+          </div>
+
+          <!-- Bagian 4: Titik Jemput & Submit -->
+          <div class="col-12">
+            <div class="step-badge"><span>4</span> DETAIL PENJEMPUTAN</div>
+            
+            <div style="display: flex; gap: 20px; align-items: center; margin-bottom: 8px;">
+              <span style="font-size: 13px; font-weight: 600;">Jumlah Kursi:</span>
+              <div class="counter-wrapper">
+                <button type="button" class="counter-btn" onclick="updateSeat(-1)">-</button>
+                <span class="counter-display" id="seatCount">1</span>
+                <button type="button" class="counter-btn" onclick="updateSeat(1)">+</button>
+              </div>
+            </div>
+
+            <div class="field-box">
+              <div class="input-field">
+                <textarea id="pickupLoc" rows="2" placeholder="Tuliskan alamat penjemputan lengkap (Nama Jalan, No. Rumah, Patokan)" required></textarea>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-wa-submit">
+              <i class="fa-brands fa-whatsapp fa-xl"></i> AMANKAN KURSI VIA WHATSAPP
+            </button>
+
+            <div class="card-footer">
+              <span><i class="fa-solid fa-bolt"></i> Konfirmasi Instan & Door to Door</span>
+              <span><i class="fa-solid fa-shield-check"></i> Pembayaran Aman</span>
+            </div>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    let seat = 1;
+
+    function updateSeat(val) {
+      seat = Math.max(1, Math.min(15, seat + val));
+      document.getElementById('seatCount').innerText = seat;
+    }
+
+    function bookingWhatsApp() {
+      // Masukkan nomor WhatsApp Travel Anda (awali dengan 62)
+      const targetAdmin = "6281350044239";
+
+      const name = document.getElementById('custName').value;
+      const phone = document.getElementById('custPhone').value;
+      const origin = document.getElementById('originCity').value;
+      const dest = document.getElementById('destCity').value;
+      const date = document.getElementById('bookDate').value;
+      const time = document.getElementById('bookTime').value;
+      const fleet = document.querySelector('input[name="fleet"]:checked').value;
+      const pickup = document.getElementById('pickupLoc').value;
+
+      const text = `*FORM PEMESANAN bahtiartravel*%0A` +
+                   `============================%0A` +
+                   `👤 *Nama:* ${name}%0A` +
+                   `📞 *WhatsApp:* ${phone}%0A` +
+                   `📍 *Rute:* ${origin} ➔ ${dest}%0A` +
+                   `📅 *Tanggal:* ${date}%0A` +
+                   `⏰ *Jadwal:* ${time}%0A` +
+                   `🚗 *Armada:* ${fleet}%0A` +
+                   `👥 *Jumlah Kursi:* ${seat} Orang%0A` +
+                   `🏠 *Alamat Jemput:* ${pickup}%0A` +
+                   `============================%0A` +
+                   `Halo Admin, mohon amankan jadwal perjalanan saya!`;
+
+      window.open(`https://wa.me/${targetAdmin}?text=${text}`, '_blank');
+    }
+  </script>
+</body>
+</html>
