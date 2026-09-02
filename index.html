@@ -416,17 +416,42 @@
 
           <!-- Bagian 2: Rute & Waktu (KOTA ASAL & TUJUAN INPUT KETIK) -->
           <div class="col-6">
+            <div class="step-badge"><span>1</span> DATA PEMESAN</div>
+            <div class="field-box">
+              <div class="input-field">
+                <i class="fa-regular fa-user"></i>
+                <input type="text" id="custName" placeholder="Nama Lengkap" required>
+              </div>
+            </div>
+            <div class="field-box">
+              <div class="input-field">
+                <i class="fa-brands fa-whatsapp"></i>
+                <input type="tel" id="custPhone" placeholder="Nomor WhatsApp" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-6">
             <div class="step-badge"><span>2</span> RUTE & JADWAL</div>
             <div class="sub-grid field-box">
               <div class="input-field">
                 <i class="fa-solid fa-location-dot"></i>
-                <input type="text" id="originCity" placeholder="Kota asal" required>
+                <input list="listKota" id="originCity" placeholder="Kota Asal (Pilih/Ketik)" required autocomplete="off">
               </div>
               <div class="input-field">
                 <i class="fa-solid fa-crosshairs"></i>
-                <input type="text" id="destCity" placeholder="Kota tujuan" required>
+                <input list="listKota" id="destCity" placeholder="Kota Tujuan (Pilih/Ketik)" required autocomplete="off">
               </div>
             </div>
+
+            <datalist id="listKota">
+              <option value="Bontang"></option>
+              <option value="Samarinda"></option>
+              <option value="Balikpapan"></option>
+              <option value="Sangatta"></option>
+              <option value="Banjar"></option>
+             
+            </datalist>
             <div class="sub-grid field-box">
               <div class="input-field">
                 <i class="fa-regular fa-calendar"></i>
